@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #f8fafc;
+  background: linear-gradient(135deg, #010101 0%, #020716 50%, #050023 100%);
+  min-height: 100vh;
+  line-height: 1.5;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Container and layout */
+.container {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  position: relative;
+}
+
+.content {
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+  z-index: 1;
+}
+
+.glass-card {
+  backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 1s ease-out;
+}
+
+/* Subtle эффект частиц на фон */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  opacity: 0.3;
+}
+
+.timer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  position: relative;
+}
+
+.timer-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.timer-item:hover {
+  transform: translateY(-4px);
+}
+
+.timer-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to bottom, #ffffff, #bfdbfe);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.timer-label {
+  font-size: 0.9rem;
+  color: #dbeafe;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive styles */
+@media (min-width: 768px) {
+  .timer-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .timer-value {
+    font-size: 4rem;
+  }
+
+  .timer-label {
+    font-size: 1.1rem;
+  }
+
+  .glass-card {
+    padding: 3rem;
+  }
+}
+
+
+@keyframes subtleMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(20px, 20px); }
+}
