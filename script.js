@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const secondsElement = document.getElementById("seconds")
 
   // Set the start date (December 29, 2024)
-  const startDate = new Date("December 29, 2024")
+  const startDate = new Date("December 29, 2024 15:26:00")
 
   // Function to update the timer
   function updateTimer() {
