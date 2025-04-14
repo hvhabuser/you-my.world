@@ -1,39 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>❤️❤️❤️❤️❤️</title>
-  <link rel="stylesheet" href="styles.css">
-  <meta name="theme-color" content="#1e3a8a">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Название страницы</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="container">
-    <div class="content"> 
-      <div class="glass-card">
-        <div class="timer-grid">
-          <div class="timer-item">
-            <div class="timer-value" id="days">00</div>
-            <div class="timer-label">Дни</div>
-          </div>
-          <div class="timer-item">
-            <div class="timer-value" id="hours">00</div>
-            <div class="timer-label">Часы</div>
-          </div>
-          <div class="timer-item">
-            <div class="timer-value" id="minutes">00</div>
-            <div class="timer-label">Минуты</div>
-          </div>
-          <div class="timer-item">
-            <div class="timer-value" id="seconds">00</div>
-            <div class="timer-label">Секунды</div>
-          </div>
+    <main>
+      <section class="timer-block box" id="timer-block">
+        <div class="timer-item" id="days">
+          <h2>00</h2>
+          <p>Дни</p>
         </div>
-      </div>
-    </div>
-  </main>
+        <div class="timer-item" id="hours">
+          <h2>00</h2>
+          <p>Часы</p>
+        </div>
+        <div class="timer-item" id="minutes">
+          <h2>00</h2>
+          <p>Минуты</p>
+        </div>
+        <div class="timer-item" id="seconds">
+          <h2>00</h2>
+          <p>Секунды</p>
+        </div>
+      </section>
 
-  <script src="script.js"></script>
+      <section class="day-counters box">
+          <div class="progress-circle-container">
+            <canvas class="particle-canvas" id="particle-canvas-100"></canvas>
+            <svg class="progress-ring" width="150" height="150" viewBox="0 0 150 150">
+              <circle
+                class="progress-ring__background"
+                stroke="#ccc"
+                stroke-width="15"
+                fill="transparent"
+                r="50"
+                cx="75"
+                cy="75"/>
+              <circle
+                class="progress-ring__progress"
+                id="progress-100"
+                stroke-width="15"
+                stroke-linecap="round"
+                fill="transparent"
+                r="50"
+                cx="75"
+                cy="75"/>
+            </svg>
+            <p class="progress-label">100</p>
+          </div>
+          <div class="progress-circle-container">
+             <canvas class="particle-canvas" id="particle-canvas-200"></canvas>
+             <svg class="progress-ring" width="150" height="150" viewBox="0 0 150 150">
+              <circle
+                class="progress-ring__background"
+                stroke="#ccc"
+                stroke-width="15"
+                fill="transparent"
+                r="50"
+                cx="75"
+                cy="75"/>
+              <circle
+                class="progress-ring__progress"
+                id="progress-200"
+                stroke-width="15"
+                stroke-linecap="round"
+                fill="transparent"
+                r="50"
+                cx="75"
+                cy="75"/>
+            </svg>
+             <p class="progress-label">200</p>
+          </div>
+          <div class="progress-circle-container">
+             <canvas class="particle-canvas" id="particle-canvas-365"></canvas>
+             <svg class="progress-ring" width="150" height="150" viewBox="0 0 150 150">
+              <circle
+                class="progress-ring__background"
+                stroke="#ccc"
+                stroke-width="15"
+                fill="transparent"
+                r="50"
+                cx="75"
+                cy="75"/>
+              <circle
+                class="progress-ring__progress"
+                id="progress-365"
+                stroke-width="15"
+                stroke-linecap="round"
+                fill="transparent"
+                r="50"
+                cx="75"
+                cy="75"/>
+            </svg>
+             <p class="progress-label">365</p>
+          </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
 </body>
 </html>
-
