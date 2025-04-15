@@ -1,273 +1,271 @@
 * {
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0.02em;
-  color: white;
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  position: relative;
-  overflow-x: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #f8fafc;
+  background: linear-gradient(135deg, #010101 0%, #020716 50%, #050023 100%);
   min-height: 100vh;
-  margin: 0;
+  line-height: 1.5;
+  overflow: hidden;
+  user-select: none;
 }
 
-body::before {
-  content: '';
-  scale: 1.1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url('bg.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  filter: blur(5px) brightness(0.8);
-  z-index: -9999;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+/* Container and layout */
+.container {
   min-height: 100vh;
-  padding: 40px 20px;
-  gap: 30px;
-  flex-wrap: wrap;
-}
-
-.day-counters {
-  display: flex;
-  flex-direction: row;
-  gap: 30px;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeIn 0.6s ease-out forwards;
-  animation-delay: 0.2s;
-}
-
-.box {
-  gap: 20px;
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-right-color: rgba(255, 255, 255, 0.1);
-  border-bottom-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2),
-              inset 0 1px 1px rgba(255, 255, 255, 0.05);
-  padding: 25px;
-  border-radius: 15px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.box:hover {
-  transform: translateY(-5px) perspective(1000px) rotateX(2deg);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3),
-              inset 0 1px 1px rgba(255, 255, 255, 0.05);
-}
-
-.timer-block {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeIn 0.6s ease-out forwards;
-  animation-delay: 0.4s;
-}
-
-.timer-item {
-  width: 110px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
   position: relative;
 }
 
-.timer-item h2 {
-  font-size: 3.5em;
-  font-weight: 600;
-  color: #f0f0f0;
-  margin-bottom: 5px;
-  transition: opacity 0.4s ease-in-out;
-}
-
-.timer-item p {
-  font-size: 0.9em;
-  color: #ccc;
-  text-transform: uppercase;
-}
-
-.progress-circle-container {
+.main-layout {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
-  position: relative;
-}
-
-/* Styles for the particle canvas */
-.particle-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 150px;  /* Match initial SVG size */
-  height: 150px; /* Match initial SVG size */
-  pointer-events: none; /* Allow clicks to go through to elements behind */
-  z-index: 0; /* Behind SVG */
-}
-
-.progress-label {
-  font-size: 1.1em;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.85);
-  text-align: center;
-  margin-top: 2px;
-  letter-spacing: 0.05em;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-}
-
-.progress-ring {
-  display: block;
-  overflow: visible;
-  position: relative; /* Ensure SVG is layered above canvas */
+  gap: 2rem; /* Space between timer and charts */
+  max-width: 1200px; /* Adjust max-width if needed */
+  width: 100%;
   z-index: 1;
 }
 
-.progress-ring__progress {
-  transform-origin: center center;
+.glass-card {
+  backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: visible; /* Allow particles to overflow */
+  animation: fadeIn 1s ease-out;
+  width: 100%; /* Make cards take full width of their container */
+}
+
+/* Timer Block specific styles (if any needed, most inherited) */
+.timer-block {
+  /* Specific styles for timer block if different from default glass-card */
+}
+
+/* Charts Block specific styles */
+.charts-block {
+  display: flex;
+  justify-content: space-around; /* Distribute charts evenly */
+  align-items: center;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 1.5rem;
+}
+
+/* Chart Wrapper */
+.chart-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative; /* Needed for particle positioning */
+}
+
+/* Chart Container */
+.chart-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 120px; /* Match SVG width */
+  height: 120px; /* Match SVG height */
+}
+
+.progress-circle {
   transform: rotate(-90deg);
-  transition: stroke-dashoffset 1s ease-out, stroke 0.5s ease-out;
 }
 
-.progress-ring__progress.glow-incomplete {
-  filter: drop-shadow(0 0 5px #1c3b6b) drop-shadow(0 0 8px rgba(28, 59, 107, 0.6));
+.progress-circle-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 10; /* Adjust stroke width for smaller charts */
 }
 
-.progress-ring__progress.glow-complete {
-  filter: drop-shadow(0 0 5px #ff7eb9) drop-shadow(0 0 10px rgba(255, 126, 185, 0.5));
+.progress-circle-fill {
+  fill: none;
+  stroke: #00ff88; /* Default progress color */
+  stroke-width: 10; /* Match background stroke width */
+  stroke-linecap: round;
+  /* stroke-dasharray calculated in JS */
+  /* stroke-dashoffset calculated in JS */
+  transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.5s ease;
 }
 
+.progress-circle-fill.completed {
+  stroke: #ff7eb9; /* Pink color for completed charts */
+  animation: pulseCompleted 1.5s infinite ease-in-out;
+}
+
+.glow {
+  filter: url(#glow);
+}
+
+/* Chart Label */
+.chart-label {
+  font-size: 0.85rem;
+  color: #dbeafe;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+}
+
+/* Subtle эффект частиц на фон - adjusted */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: -50px; /* Extend inset to avoid sharp edges */
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  opacity: 0.2;
+  z-index: -1; /* Ensure it's behind content */
+  pointer-events: none; /* Don't interfere with interactions */
+}
+
+.timer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  position: relative;
+}
+
+.timer-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.timer-item:hover {
+  transform: translateY(-4px);
+}
+
+.timer-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to bottom, #ffffff, #bfdbfe);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.timer-label {
+  font-size: 0.9rem;
+  color: #dbeafe;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+/* Анимации */
 @keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* --- Responsive Styles --- */
-@media (max-width: 768px) {
-  main {
-    padding: 30px 10px;
-    gap: 25px;
-  }
+@keyframes pulseCompleted {
+  0% { stroke-width: 10; filter: url(#glow) drop-shadow(0 0 3px #ff7eb9); }
+  50% { stroke-width: 12; filter: url(#glow) drop-shadow(0 0 8px #ff7eb9); }
+  100% { stroke-width: 10; filter: url(#glow) drop-shadow(0 0 3px #ff7eb9); }
+}
 
-  .box {
-    padding: 18px;
-    gap: 15px;
+/* Heart particle animation */
+@keyframes flyHeart {
+  0% {
+    transform: translate(0, 0) scale(0.3);
+    opacity: 1;
   }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0);
+    opacity: 0;
+  }
+}
 
-  .timer-block {
+.heart-particle {
+  position: absolute;
+  font-size: 1.5rem;
+  color: #ff7eb9;
+  pointer-events: none;
+  animation: flyHeart 1.5s ease-out forwards;
+  left: 50%; /* Start near center of chart */
+  top: 50%;
+  transform-origin: center;
+}
+
+/* Responsive styles */
+@media (min-width: 768px) {
+  .main-layout {
+    flex-direction: row; /* Horizontal layout on larger screens */
+    align-items: flex-start; /* Align items to the top */
     justify-content: center;
-    gap: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
   }
 
-  .timer-item {
-    width: 85px;
+  .timer-block,
+  .charts-block {
+    width: auto; /* Allow blocks to size based on content */
+    flex-shrink: 0;
   }
 
-  .timer-item h2 {
-    font-size: 2.5em;
+  .timer-grid {
+    grid-template-columns: repeat(4, 1fr);
   }
 
-  .timer-item p {
-    font-size: 0.75em;
+  .timer-value {
+    font-size: 4rem;
   }
 
-  .day-counters {
-    gap: 15px;
-    padding-left: 10px;
-    padding-right: 10px;
+  .timer-label {
+    font-size: 1.1rem;
   }
 
-  .progress-circle-container {
-    gap: 2px;
+  .glass-card {
+    padding: 3rem;
   }
 
-  .progress-ring {
-    width: 100px;
-    height: 100px;
+  .charts-block {
+     flex-direction: row; /* Ensure charts stay horizontal */
+     gap: 2rem;
   }
 
-  /* Adjust canvas size for medium screens */
-  .particle-canvas {
-    width: 100px;
-    height: 100px;
+  .chart-container {
+      width: 150px;
+      height: 150px;
   }
-
-  .progress-label {
-    font-size: 0.9em;
-    margin-top: 1px;
-    letter-spacing: 0.03em;
+  .progress-circle-bg,
+  .progress-circle-fill {
+      stroke-width: 12;
   }
-}
-
-/* Optional: Further adjustments for very small screens */
-@media (max-width: 480px) {
-  main {
-    padding: 20px 5px;
-    gap: 20px;
+  /* Adjust SVG size if needed for larger charts */
+  .charts-block svg {
+      width: 150px;
+      height: 150px;
   }
-   .box {
-     padding: 15px;
-     border-radius: 12px;
-   }
-  .timer-item {
-    width: 65px;
+  .charts-block .progress-circle-bg,
+  .charts-block .progress-circle-fill {
+      cx: 75; /* Center in 150px SVG */
+      cy: 75;
+      r: 65; /* Adjust radius */
   }
-  .timer-item h2 {
-    font-size: 2em;
-  }
-  .timer-item p {
-    font-size: 0.65em;
-  }
-  .day-counters {
-      gap: 10px;
-      padding-left: 5px;
-      padding-right: 5px;
-  }
-  .progress-ring {
-    width: 80px;
-    height: 80px;
-  }
-   .progress-label {
-    font-size: 0.8em;
-   }
-
-  /* Adjust canvas size for small screens */
-  .particle-canvas {
-    width: 80px;
-    height: 80px;
+  .chart-label {
+      font-size: 1rem;
   }
 }
 
-
-
-
-
-
+@keyframes subtleMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(20px, 20px); }
+}
