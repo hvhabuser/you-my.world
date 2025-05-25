@@ -1,25 +1,20 @@
 * {
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0.02em;
-  color: white;
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
 }
 
 body {
-  position: relative;
-  overflow: hidden;
   min-height: 100vh;
-  margin: 0;
+  background: linear-gradient(135deg, #121212, #2a2a2a);
+  color: #fff;
+  overflow: hidden;
+  position: relative;
 }
 
 body::before {
   content: '';
-  scale: 1.1;
   position: absolute;
   top: 0;
   left: 0;
@@ -28,137 +23,99 @@ body::before {
   background-image: url('bg.jpg');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  filter: blur(5px) brightness(0.8);
-  z-index: -9999;
+  opacity: 0.5;
+  filter: grayscale(30%) brightness(0.6);
+  z-index: -1;
 }
 
-main {
+.container {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  padding: 40px 20px;
-  gap: 30px;
-  flex-wrap: wrap;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
 }
 
-.day-counters {
-  display: flex;
-  flex-direction: row;
-  gap: 30px;
-  align-items: center;
-  justify-content: center;
+.message-top {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 3rem;
+  color: #f0f0f0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeSlideDown 1.2s ease forwards;
+}
+
+.message-bottom {
+  font-size: 1.8rem;
+  font-weight: 300;
+  margin-top: 3rem;
+  color: #e0e0e0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeIn 0.6s ease-out forwards;
-  animation-delay: 0.2s;
-}
-
-.box {
-  gap: 20px;
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-right-color: rgba(255, 255, 255, 0.1);
-  border-bottom-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2),
-              inset 0 1px 1px rgba(255, 255, 255, 0.05);
-  padding: 25px;
-  border-radius: 15px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.box:hover {
-  transform: translateY(-5px) perspective(1000px) rotateX(2deg);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3),
-              inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  animation: fadeSlideUp 1.2s ease forwards;
+  animation-delay: 0.8s;
 }
 
 .timer-block {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  gap: 1.5rem;
+  padding: 2.5rem;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 
+              0 1px 2px rgba(255, 255, 255, 0.1);
+  transform: translateY(10px);
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeIn 0.6s ease-out forwards;
-  animation-delay: 0.4s;
+  animation: fadeIn 1.5s ease forwards;
+  animation-delay: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.timer-block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: shimmer 3s infinite;
 }
 
 .timer-item {
-  width: 110px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  min-width: 90px;
   position: relative;
 }
 
 .timer-item h2 {
-  font-size: 3.5em;
+  font-size: 3.5rem;
   font-weight: 600;
-  color: #f0f0f0;
-  margin-bottom: 5px;
-  transition: opacity 0.4s ease-in-out;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
 }
 
 .timer-item p {
-  font-size: 0.9em;
-  color: #ccc;
+  font-size: 0.85rem;
+  color: #aaa;
   text-transform: uppercase;
-}
-
-.progress-circle-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  position: relative;
-}
-
-/* Styles for the particle canvas */
-.particle-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 150px;  /* Match initial SVG size */
-  height: 150px; /* Match initial SVG size */
-  pointer-events: none; /* Allow clicks to go through to elements behind */
-  z-index: 0; /* Behind SVG */
-}
-
-.progress-label {
-  font-size: 1.1em;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.85);
-  text-align: center;
-  margin-top: 2px;
-  letter-spacing: 0.05em;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-}
-
-.progress-ring {
-  display: block;
-  overflow: visible;
-  position: relative; /* Ensure SVG is layered above canvas */
-  z-index: 1;
-}
-
-.progress-ring__progress {
-  transform-origin: center center;
-  transform: rotate(-90deg);
-  transition: stroke-dashoffset 1s ease-out, stroke 0.5s ease-out;
-}
-
-.progress-ring__progress.glow-incomplete {
-  filter: drop-shadow(0 0 5px #1c3b6b) drop-shadow(0 0 8px rgba(28, 59, 107, 0.6));
-}
-
-.progress-ring__progress.glow-complete {
-  filter: drop-shadow(0 0 5px #ff7eb9) drop-shadow(0 0 10px rgba(255, 126, 185, 0.5));
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
 }
 
 @keyframes fadeIn {
@@ -168,101 +125,84 @@ main {
   }
 }
 
-/* --- Responsive Styles --- */
-@media (max-width: 768px) {
-  main {
-    padding: 30px 10px;
-    gap: 25px;
-  }
-
-  .box {
-    padding: 18px;
-    gap: 15px;
-  }
-
-  .timer-block {
-    justify-content: center;
-    gap: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .timer-item {
-    width: 85px;
-  }
-
-  .timer-item h2 {
-    font-size: 2.5em;
-  }
-
-  .timer-item p {
-    font-size: 0.75em;
-  }
-
-  .day-counters {
-    gap: 15px;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .progress-circle-container {
-    gap: 2px;
-  }
-
-  .progress-ring {
-    width: 100px;
-    height: 100px;
-  }
-
-  /* Adjust canvas size for medium screens */
-  .particle-canvas {
-    width: 100px;
-    height: 100px;
-  }
-
-  .progress-label {
-    font-size: 0.9em;
-    margin-top: 1px;
-    letter-spacing: 0.03em;
+@keyframes fadeSlideDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Optional: Further adjustments for very small screens */
-@media (max-width: 480px) {
-  main {
-    padding: 20px 5px;
-    gap: 20px;
+@keyframes fadeSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-   .box {
-     padding: 15px;
-     border-radius: 12px;
-   }
-  .timer-item {
-    width: 65px;
-  }
-  .timer-item h2 {
-    font-size: 2em;
-  }
-  .timer-item p {
-    font-size: 0.65em;
-  }
-  .day-counters {
-      gap: 10px;
-      padding-left: 5px;
-      padding-right: 5px;
-  }
-  .progress-ring {
-    width: 80px;
-    height: 80px;
-  }
-   .progress-label {
-    font-size: 0.8em;
-   }
+}
 
-  /* Adjust canvas size for small screens */
-  .particle-canvas {
-    width: 80px;
-    height: 80px;
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .message-top {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+  
+  .message-bottom {
+    font-size: 1.3rem;
+    margin-top: 2rem;
+  }
+  
+  .timer-block {
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .timer-item {
+    min-width: 70px;
+  }
+  
+  .timer-item h2 {
+    font-size: 2.5rem;
+  }
+  
+  .timer-item p {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .message-top {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .message-bottom {
+    font-size: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .timer-block {
+    gap: 0.7rem;
+    padding: 1rem;
+  }
+  
+  .timer-item {
+    min-width: 60px;
+  }
+  
+  .timer-item h2 {
+    font-size: 2rem;
+  }
+  
+  .timer-item p {
+    font-size: 0.6rem;
   }
 }
 
