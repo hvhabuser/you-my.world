@@ -3,8 +3,7 @@ const hoursEl = document.getElementById('hours').querySelector('h2');
 const minutesEl = document.getElementById('minutes').querySelector('h2');
 const secondsEl = document.getElementById('seconds').querySelector('h2');
 
-// Set the target date (December 29, 2024)
-const targetDate = new Date('December 29, 2024 15:26:00').getTime();
+const targetDate = new Date('June 28, 2022 00:00:00').getTime();
 
 function updateTimerElement(element, value) {
     const currentValue = element.innerText;
